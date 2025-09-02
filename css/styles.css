@@ -271,8 +271,11 @@ section {
 
 /* Sustainability Section */
 .sustainability {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/ferrari-sf90.jpg') center/cover no-repeat;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../images/ferrari-sf90.jpg') center/cover no-repeat fixed;
     position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
 }
 
 .sustainability .section-title {
@@ -285,28 +288,34 @@ section {
 
 .sustainability-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
 }
 
 .sustainability-card {
-    background-color: var(--ferrari-white);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 2rem;
-    border-radius: var(--border-radius);
-    box-shadow: var(--ferrari-shadow-dark);
+    border-radius: 16px;
     text-align: center;
-    transition: var(--transition);
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .sustainability-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .card-icon {
     width: 80px;
     height: 80px;
-    background-color: var(--ferrari-red);
+    background: rgba(255, 40, 0, 0.9);
+    backdrop-filter: blur(10px);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -314,15 +323,18 @@ section {
     margin: 0 auto 1.5rem;
     color: var(--ferrari-white);
     font-size: 2rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .card-title {
-    color: var(--ferrari-dark-grey);
+    color: var(--ferrari-white);
     margin-bottom: 1rem;
+    font-weight: 700;
 }
 
 .card-description {
     line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 /* Reports Section */
@@ -414,6 +426,91 @@ section {
 .report-download:active {
     transform: translateY(0);
     box-shadow: 0 4px 15px rgba(255, 40, 0, 0.3);
+}
+
+/* Coming Soon Card Styles */
+.report-card.coming-soon {
+    background-color: var(--ferrari-grey);
+    position: relative;
+    overflow: hidden;
+}
+
+.report-card.coming-soon::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    color: var(--ferrari-light-grey);
+    background-size: 200% 200%;
+    animation: gradientShift 3s ease infinite;
+    z-index: -1;
+    border-radius: inherit;
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.report-card.coming-soon .report-year {
+    background-color: var(--ferrari-red);
+    color: var(--ferrari-white);
+    position: relative;
+}
+
+.report-card.coming-soon .report-title {
+    color: var(--ferrari-dark-grey);
+    position: relative;
+}
+
+.report-card.coming-soon .report-description {
+    color: var(--ferrari-light-grey);
+    font-style: italic;
+    position: relative;
+}
+
+.report-info .report-status,
+.report-info .report-date {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--ferrari-red);
+    font-weight: 600;
+}
+
+.report-coming-soon {
+    width: calc(100% - 4rem);
+    margin: 0 2rem 2rem;
+    justify-content: center;
+    background: linear-gradient(135deg, #ccc 0%, #aaa 100%);
+    color: #666;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 16px 32px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    cursor: not-allowed;
+    position: relative;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.report-coming-soon:hover {
+    background: linear-gradient(135deg, #bbb 0%, #999 100%);
+    transform: none;
+}
+
+.report-coming-soon i {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
 }
 
 .report-download i {
@@ -644,8 +741,19 @@ section {
         padding: 3rem 0;
     }
     
+    /* Sustainability responsive */
+    .sustainability {
+        min-height: auto;
+        background-attachment: scroll;
+    }
+    
     .sustainability-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .sustainability-card {
+        padding: 1.5rem;
     }
     
     .reports-grid {
@@ -690,6 +798,15 @@ section {
     /* Hero */
     .hero {
         padding: 2rem 0;
+    }
+    
+    /* Sustainability mobile */
+    .sustainability-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .sustainability-card {
+        padding: 1.2rem;
     }
     
     .hero-buttons {
